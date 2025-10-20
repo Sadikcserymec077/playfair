@@ -1,4 +1,5 @@
 // Encrypt flow
+// Encrypt flow
 async function encryptFlow() {
     const key = document.getElementById('key').value;
     const text = document.getElementById('plaintext').value;
@@ -11,21 +12,23 @@ async function encryptFlow() {
 
     const data = await res.json();
 
-    // Show encryption section
+    // 🔹 Show Key Matrix
+    showMatrix(data.matrix);
+
+    // Encryption section
     document.getElementById('encryption-section').style.display = 'block';
     document.getElementById('decryption-section').style.display = 'none';
 
-    // Update encryption result
     document.getElementById('prepared').innerText = data.prepared;
     document.getElementById('cipher').innerText = data.cipher;
     showSteps('enc-steps', data.enc_steps);
 
-    // Auto-fill ciphertext into decrypt box
+    // Auto-fill ciphertext
     document.getElementById('ciphertext').value = data.cipher;
-
-    // Reveal decrypt section
     document.getElementById('decryption-section').style.display = 'block';
 }
+
+showMatrix(data.matrix);
 
 // Decrypt flow
 async function decryptFlow() {
@@ -68,3 +71,18 @@ function styleRowByRule(tr, rule) {
         tr.style.backgroundColor = '#fff3e0'; // orange
     }
 }
+function showMatrix(matrix) {
+    const table = document.getElementById('matrix');
+    table.innerHTML = ''; // clear previous
+
+    matrix.forEach(row => {
+        const tr = document.createElement('tr');
+        row.forEach(ch => {
+            const td = document.createElement('td');
+            td.innerText = ch;
+            tr.appendChild(td);
+        });
+        table.appendChild(tr);
+    });
+}
+

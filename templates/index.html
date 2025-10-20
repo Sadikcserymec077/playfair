@@ -13,7 +13,7 @@
 
   <main class="box">
 
-    <!-- 🔹 Input Section -->
+    <!-- Input Section -->
     <div class="input-group">
       <label>Keyword:</label>
       <input id="key" placeholder="e.g., MONARCHY" value="MONARCHY">
@@ -28,11 +28,20 @@
       <input id="plaintext" placeholder="Enter message to encrypt" value="INSTRUMENTS">
 
       <div class="controls">
-        <button onclick="encryptFlow()">Encrypt</button>
+        <button onclick="encryptFlow()">Encrypt ➜ Auto Copy Cipher</button>
       </div>
     </div>
 
-    <!-- 🔹 Encryption Results -->
+    <!-- 🧮 Key Matrix -->
+    <section id="matrix-section">
+      <h3>🔠 Generated Key Matrix</h3>
+      <div class="matrix-container">
+        <table id="matrix"></table>
+      </div>
+      <small>The 5×5 matrix is formed from your keyword + remaining alphabets (I/J combined).</small>
+    </section>
+
+    <!-- Encryption Results -->
     <section id="encryption-section">
       <h3>Encryption Result</h3>
       <p><b>Prepared Text:</b> <span id="prepared"></span></p>
@@ -44,7 +53,7 @@
       </div>
     </section>
 
-    <!-- 🔹 Decryption Section -->
+    <!-- Decryption Section -->
     <section id="decryption-section" style="display:none;">
       <label>Decrypt This Ciphertext:</label>
       <input id="ciphertext" placeholder="Ciphertext will appear here automatically">
