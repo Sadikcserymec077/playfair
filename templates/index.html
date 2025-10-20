@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playfair Cipher — Interactive Demo</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h2>🔐 Playfair Cipher — Encrypt ➜ Auto Decrypt</h2>
+  </header>
+
+  <main class="box">
+
+    <!-- 🔹 Input Section -->
+    <div class="input-group">
+      <label>Keyword:</label>
+      <input id="key" placeholder="e.g., MONARCHY" value="MONARCHY">
+
+      <label>Padding Letter:</label>
+      <select id="pad">
+        <option value="X">X</option>
+        <option value="Q">Q</option>
+      </select>
+
+      <label>Enter Plaintext:</label>
+      <input id="plaintext" placeholder="Enter message to encrypt" value="INSTRUMENTS">
+
+      <div class="controls">
+        <button onclick="encryptFlow()">Encrypt</button>
+      </div>
+    </div>
+
+    <!-- 🔹 Encryption Results -->
+    <section id="encryption-section">
+      <h3>Encryption Result</h3>
+      <p><b>Prepared Text:</b> <span id="prepared"></span></p>
+      <p><b>Ciphertext:</b> <span id="cipher" class="cipher"></span></p>
+
+      <h4>Encryption Steps</h4>
+      <div class="table-wrapper">
+        <table id="enc-steps" class="steps"></table>
+      </div>
+    </section>
+
+    <!-- 🔹 Decryption Section -->
+    <section id="decryption-section" style="display:none;">
+      <label>Decrypt This Ciphertext:</label>
+      <input id="ciphertext" placeholder="Ciphertext will appear here automatically">
+
+      <div class="controls">
+        <button onclick="decryptFlow()">Decrypt</button>
+      </div>
+
+      <h3>Decryption Result</h3>
+      <p><b>Decrypted Text:</b> <span id="plain" class="plain"></span></p>
+
+      <h4>Decryption Steps</h4>
+      <div class="table-wrapper">
+        <table id="dec-steps" class="steps"></table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>📱 Responsive Playfair Cipher Demo • Built with Flask</p>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
