@@ -1,51 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Playfair Cipher — Interactive Demo</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="static/style.css" />
 </head>
 <body>
   <header>
-    <h2>🔐 Playfair Cipher — Encrypt ➜ Auto Decrypt</h2>
+    <h2>Playfair Cipher — Encrypt → Auto Decrypt</h2>
   </header>
 
   <main class="box">
 
-    <!-- Input Section -->
-    <div class="input-group">
-      <label>Keyword:</label>
-      <input id="key" placeholder="e.g., MONARCHY" value="MONARCHY">
+    <!-- 1. Description -->
+    <section id="description">
+      <h3>What is Playfair Cipher?</h3>
+      <p>
+        The <strong>Playfair Cipher</strong> is a classical encryption technique invented in 1854 by Charles Wheatstone and promoted by Lord Playfair.
+        It encrypts text two letters at a time (called <strong>digraphs</strong>), which makes it stronger than simple substitution ciphers.
+      </p>
 
-      <label>Padding Letter:</label>
+      <p>
+        Create a 5×5 matrix from a secret keyword (I and J share a cell). Encryption works on letter pairs:
+      </p>
+
+      <h4>Rules of Encryption</h4>
+      <ul>
+        <li><strong>Same Row:</strong> replace each letter with the one to its right (wrap to start).</li>
+        <li><strong>Same Column:</strong> replace each letter with the one below (wrap to top).</li>
+        <li><strong>Rectangle Rule:</strong> if letters form a rectangle, replace each with the letter in the same row but in the other column.</li>
+        <li><strong>Duplicate letters:</strong> if both letters in a pair are the same, insert the padding letter between them (commonly X).</li>
+      </ul>
+
+      <h4>Example</h4>
+      <p>
+        <strong>Keyword:</strong> MONARCHY<br/>
+        <strong>Plaintext:</strong> INSTRUMENTS<br/>
+        <strong>Prepared:</strong> IN ST RU ME NT SX<br/>
+        <strong>Ciphertext:</strong> GATLMZCLRQXA
+      </p>
+
+      <p class="highlight">
+        Use the form below to generate the key matrix, see encryption steps, and auto-decrypt the result.
+      </p>
+
+      <hr/>
+    </section>
+
+    <!-- 2. Input -->
+    <div class="input-group">
+      <label for="key">Keyword:</label>
+      <input id="key" placeholder="e.g., MONARCHY" value="MONARCHY" />
+
+      <label for="pad">Padding Letter:</label>
       <select id="pad">
         <option value="X">X</option>
         <option value="Q">Q</option>
       </select>
 
-      <label>Enter Plaintext:</label>
-      <input id="plaintext" placeholder="Enter message to encrypt" value="INSTRUMENTS">
+      <label for="plaintext">Enter Plaintext:</label>
+      <input id="plaintext" placeholder="Enter message to encrypt" value="INSTRUMENTS" />
 
       <div class="controls">
-        <button onclick="encryptFlow()">Encrypt ➜ </button>
+        <button id="btn-encrypt">Encrypt →</button>
       </div>
     </div>
 
-    <!-- 🧮 Key Matrix -->
+    <!-- 3. Matrix -->
     <section id="matrix-section">
-      <h3>🔠 Generated Key Matrix</h3>
+      <h3>Generated Key Matrix</h3>
       <div class="matrix-container">
-        <table id="matrix"></table>
+        <table id="matrix" aria-label="Key matrix"></table>
       </div>
-      <small>The 5×5 matrix is formed from your keyword + remaining alphabets (I/J combined).</small>
+      <small>The 5×5 matrix is formed from your keyword + remaining alphabets (I and J combined).</small>
     </section>
 
-    <!-- Encryption Results -->
+    <!-- 4. Encryption result -->
     <section id="encryption-section">
       <h3>Encryption Result</h3>
-      <p><b>Prepared Text:</b> <span id="prepared"></span></p>
-      <p><b>Ciphertext:</b> <span id="cipher" class="cipher"></span></p>
+      <p><strong>Prepared Text:</strong> <span id="prepared"></span></p>
+      <p><strong>Ciphertext:</strong> <span id="cipher" class="cipher"></span></p>
 
       <h4>Encryption Steps</h4>
       <div class="table-wrapper">
@@ -53,29 +88,30 @@
       </div>
     </section>
 
-    <!-- Decryption Section -->
-    <section id="decryption-section" style="display:none;">
-      <label>Decrypt This Ciphertext:</label>
-      <input id="ciphertext" placeholder="Ciphertext will appear here automatically">
+    <!-- 5. Decryption -->
+    <section id="decryption-section" style="display:block;">
+      <label for="ciphertext">Decrypt This Ciphertext:</label>
+      <input id="ciphertext" placeholder="Ciphertext will appear here automatically" />
 
       <div class="controls">
-        <button onclick="decryptFlow()">Decrypt ➜</button>
+        <button id="btn-decrypt">Decrypt →</button>
       </div>
 
       <h3>Decryption Result</h3>
-      <p><b>Decrypted Text:</b> <span id="plain" class="plain"></span></p>
+      <p><strong>Decrypted Text:</strong> <span id="plain" class="plain"></span></p>
 
       <h4>Decryption Steps</h4>
       <div class="table-wrapper">
         <table id="dec-steps" class="steps"></table>
       </div>
     </section>
+
   </main>
 
   <footer>
-    <p>📱 Responsive Playfair Cipher Demo • Built with Flask</p>
+    <p>Responsive Playfair Cipher Demo • Client-side</p>
   </footer>
 
-  <script src="/static/script.js"></script>
+  <script src="static/script.js"></script>
 </body>
 </html>
